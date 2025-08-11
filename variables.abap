@@ -42,3 +42,10 @@ WRITE : / lv_v6. "output: 101214
 "string
 lv_v7 = 'Hello World .1234'.
 WRITE : / lv_v7. "ouput: Hello World .1234
+
+* extract only month
+
+DATA: lv_month(2) TYPE c.
+
+lv_month = sy-datum+4(2).
+WRITE : / lv_month
