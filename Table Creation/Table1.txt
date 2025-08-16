@@ -1,0 +1,37 @@
+&---------------------------------------------------------------------
+*& Report ZR_PRG_AUG15
+&---------------------------------------------------------------------
+*&
+&---------------------------------------------------------------------
+REPORT zr_prg_aug15.
+
+" GT or LT
+
+DATA : gt_emp TYPE TABLE OF ztempmsater, " internal table GT / LT (step: 1)
+       gs_emp TYPE ztempmsater. " work area - WA / GS / LS (step: 2)
+
+" select query (step: 3)
+
+SELECT *
+  FROM ztempmsater
+  INTO TABLE gt_emp.
+
+" (step: 4)
+
+IF sy-subrc EQ 0. " success
+
+  " title
+
+  WRITE : / 'EMPID', 'Title',15 'FName',31 'LName',47 'DOJ',58 'DEPT',74 'CTC',85 'currency'.
+
+  ULINE.
+
+  LOOP AT gt_emp INTO gs_emp.
+
+    " data
+    WRITE : / gs_emp-empid,7 gs_emp-title,15 gs_emp-first_name,31 gs_emp-last_name,
+    47 gs_emp-doj,58 gs_emp-dept,74 gs_emp-ctc,85 gs_emp-currency.
+
+  ENDLOOP.
+
+ENDIF.
